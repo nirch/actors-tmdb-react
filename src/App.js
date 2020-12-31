@@ -1,10 +1,10 @@
-import { Button } from 'react-bootstrap';
 import './App.css';
+import ActorsPage from './pages/ActorsPage';
 
 function App() {
   return (
     <>
-      <Button variant="success"/>
+      <ActorsPage/>
     </>
   );
 }
