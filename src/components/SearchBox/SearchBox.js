@@ -12,10 +12,11 @@ import './SearchBox.css'
 // onSearchChanged - event function - will be invoked for each text change
 // onResultSelected - event function - will be invoked when the user selects a result (sends the index of the selected result)
 function SearchBox(props) {
-    const {placeholder, value, onSearchChange, results} = props;
+    const {placeholder, value, onSearchChange, results, onResultSelected} = props;
 
     // converting data into presentation
-    const resultItems = results.map((result, index) => <ListGroup.Item action key={index}>{result}</ListGroup.Item>)
+    const resultItems = results.map((result, index) => 
+        <ListGroup.Item onClick={()=>onResultSelected(index)} action key={index}>{result}</ListGroup.Item>)
     return (
         <div className="c-searchbox">
             <Form.Control type="text" placeholder={placeholder} value={value} onChange={e => onSearchChange(e.target.value)}/> 
