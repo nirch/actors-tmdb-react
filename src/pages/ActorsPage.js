@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react"
 import { Container } from "react-bootstrap";
 import ActorCard from "../components/ActorCard/ActorCard";
@@ -6,7 +7,7 @@ import ActorModel from "../model/ActorModel";
 import './ActorsPage.css'
 
 function ActorsPage() {
-    const [actors, setActors] = useState([new ActorModel("Brad Pitt"), new ActorModel("Bruce Willis"), new ActorModel("Bla Willis"), new ActorModel("Sarah Willis")]);
+    const [actors, setActors] = useState([]);
     const [searchText, setSearchText] = useState("");
     const [results, setResults] = useState([]);
 
@@ -15,7 +16,9 @@ function ActorsPage() {
 
         // update results is search is not empty
         if (newSearchText) {
-            setResults(["John Doe", "Dave Doe"]);
+            axios.get("https://api.themoviedb.org/3/search/person?api_key=53d2ee2137cf3228aefae083c8158855&query=" + newSearchText).then(res => {
+                setResults(res.data.results.map(result => result.name));
+            })
         } else {
             setResults([]);
         }
