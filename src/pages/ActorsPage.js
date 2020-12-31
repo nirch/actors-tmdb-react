@@ -10,6 +10,8 @@ function ActorsPage() {
     const [actors, setActors] = useState([]);
     const [searchText, setSearchText] = useState("");
     const [results, setResults] = useState([]);
+    const [resultsFull, setResultsFull] = useState([]);
+
 
     function searchTextChange(newSearchText) {
         setSearchText(newSearchText);
@@ -18,6 +20,7 @@ function ActorsPage() {
         if (newSearchText) {
             axios.get("https://api.themoviedb.org/3/search/person?api_key=53d2ee2137cf3228aefae083c8158855&query=" + newSearchText).then(res => {
                 setResults(res.data.results.map(result => result.name));
+                setResultsFull(res.data.results);
             })
         } else {
             setResults([]);
@@ -26,7 +29,7 @@ function ActorsPage() {
 
     function addActor(index) {
         // alert(results[index]);
-        setActors(actors.concat(new ActorModel(results[index])));
+        setActors(actors.concat(new ActorModel(resultsFull[index].name, resultsFull[index].profile_path)));
         setSearchText("");
         setResults([]);
     }

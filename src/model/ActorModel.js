@@ -2,7 +2,7 @@
 class ActorModel {
     constructor(name, img) {
         this.name = name;
-        this.img = img;
+        this.img = 'https://image.tmdb.org/t/p/w500' + img;
     }
 }
 
