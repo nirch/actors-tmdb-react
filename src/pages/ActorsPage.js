@@ -7,12 +7,13 @@ import './ActorsPage.css'
 
 function ActorsPage() {
     const [actors, setActor] = useState([new ActorModel("Brad Pitt"), new ActorModel("Bruce Willis")]);
+    const [searchText, setSearchText] = useState("");
 
     const actorsView = actors.map(actor => <ActorCard actor={actor}/>)
     return (
         <div className="p-actors">
             <Container>
-                <SearchBox placeholder="Add actor..."/>
+                <SearchBox placeholder="Add actor..." value={searchText} onSearchChange={value => setSearchText(value)}/>
                 {actorsView}
             </Container>
         </div>
